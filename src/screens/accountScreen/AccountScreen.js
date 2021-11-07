@@ -2,7 +2,7 @@ import React from 'react'
 import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-export function Account() {
+export function AccountScreen() {
   return (
     <SafeAreaView>
       <Text>Account</Text>

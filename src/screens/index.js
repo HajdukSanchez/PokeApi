@@ -1,3 +1,4 @@
-export { Account } from './account/Account'
-export { Pokedex } from './pokedex/Pokedex'
-export { Favorites } from './favorites/Favorites'
+export { AccountScreen } from './accountScreen/AccountScreen'
+export { PokedexScreen } from './pokedexScreen/PokedexScreen'
+export { FavoritesScreen } from './favoritesScreen/FavoritesScreen'
+export { PokemonScreen } from './pokemonScreen/PokemonScreen'

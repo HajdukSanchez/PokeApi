@@ -2,16 +2,17 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Account, Favorites, Pokedex } from '../screens'
+// * Stacks
+import { FavoriteNavigation, PokedexNavigation, AccountNavigation } from '../'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-export function Navigation() {
+export function TabNavigation() {
   return (
     <Navigator>
       <Screen
         name='Account'
-        component={Account}
+        component={AccountNavigation}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => <Icon name='user' color={color} size={size} />,
@@ -19,12 +20,12 @@ export function Navigation() {
       />
       <Screen
         name='Pokedex'
-        component={Pokedex}
+        component={PokedexNavigation}
         options={{ tabBarLabel: '', tabBarIcon: () => renderPokeBall() }}
       />
       <Screen
         name='Favorites'
-        component={Favorites}
+        component={FavoriteNavigation}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => <Icon name='heart' color={color} size={size} />,
@@ -41,5 +42,5 @@ function renderPokeBall() {
     top: -18,
   }
 
-  return <Image source={require('../assets/icon.png')} style={styles} />
+  return <Image source={require('../../assets/icon.png')} style={styles} />
 }
