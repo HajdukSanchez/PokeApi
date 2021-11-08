@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, StyleSheet, ActivityIndicator } from 'react-native'
+import { FlatList, StyleSheet, ActivityIndicator, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 // * Components
 import { PokemonCard } from '../pokemonCard/PokemonCard'
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
   },
   spinner: {
     marginTop: 20,
-    marginBottom: 60,
+    marginBottom: Platform.OS === 'ios' ? 0 : 20, // * iOS has a different behavior
   },
 })
