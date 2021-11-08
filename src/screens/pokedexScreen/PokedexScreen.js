@@ -6,11 +6,11 @@ import { usePokemon } from '../../hooks/usePokemon'
 import { PokemonList } from '../../components'
 
 export function PokedexScreen() {
-  const { pokemons } = usePokemon()
+  const { pokemons, loadPokemons, nextUrl } = usePokemon()
 
   return (
     <SafeAreaView>
-      <PokemonList pokemons={pokemons} />
+      <PokemonList pokemons={pokemons} loadPokemons={loadPokemons} isNext={nextUrl} />
     </SafeAreaView>
   )
 }

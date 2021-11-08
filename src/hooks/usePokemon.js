@@ -3,6 +3,7 @@ import { getPokemon, getPokemonDetailByUrl } from '../api/pokemon'
 
 export function usePokemon() {
   const [pokemons, setPokemons] = useState([])
+  const [nextUrl, setNextUrl] = useState(null)
 
   useEffect(() => {
     ;(async () => await loadPokemons())()
@@ -10,7 +11,8 @@ export function usePokemon() {
 
   const loadPokemons = async () => {
     try {
-      const response = await getPokemon()
+      const response = await getPokemon(nextUrl)
+      setNextUrl(response.next) // * set next url for load more
       response.results.forEach(async (pokemon) => {
         const pokemonDetail = await getPokemonDetailByUrl(pokemon.url) // * Get pokemon detail
         setPokemons((pokemons) => [
@@ -29,5 +31,5 @@ export function usePokemon() {
     }
   }
 
-  return { pokemons }
+  return { pokemons, loadPokemons, nextUrl }
 }
