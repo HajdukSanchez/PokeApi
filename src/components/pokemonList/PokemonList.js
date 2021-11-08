@@ -1,6 +1,8 @@
 import React from 'react'
-import { FlatList, Text } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
+// * Components
+import { PokemonCard } from '../pokemonCard/PokemonCard'
 
 export function PokemonList({ pokemons }) {
   return (
@@ -9,8 +11,8 @@ export function PokemonList({ pokemons }) {
       numColumns={1}
       showsVerticalScrollIndicator={false}
       keyExtractor={(pokemon) => String(pokemon.id)}
-      // renderItem={(pokemon) => <PokemonItem pokemon={pokemon} />}
-      renderItem={({ item }) => <Text>{item.name}</Text>}
+      renderItem={({ item }) => <PokemonCard pokemon={item} />}
+      style={styles.view}
     />
   )
 }
@@ -22,3 +24,9 @@ PokemonList.defaultProps = {
 PokemonList.propTypes = {
   pokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
+
+const styles = StyleSheet.create({
+  view: {
+    paddingTop: 50,
+  },
+})
