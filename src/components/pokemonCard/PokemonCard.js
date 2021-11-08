@@ -1,11 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { func } from 'prop-types'
 import { capitalize } from 'lodash'
+import { useNavigation } from '@react-navigation/core'
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Image } from 'react-native'
 // * Utils
 import { getColorByType } from '../../utils/getColorByType'
 
 export function PokemonCard({ pokemon }) {
+  const navigation = useNavigation()
+
   const bgStyles = {
     // ? Styles for card background
     backgroundColor: getColorByType(pokemon.type.toLowerCase()) || '#fff',
@@ -13,7 +16,8 @@ export function PokemonCard({ pokemon }) {
   }
 
   const goToPokemon = () => {
-    console.log(`Go to pokemon ${pokemon.name}`)
+    // ! We can only pass plain data in the navigate function
+    navigation.navigate('Pokemon', { id: pokemon.id }) // ? Navigate to Pokemon screen depending on pokemon ID
   }
 
   return (
