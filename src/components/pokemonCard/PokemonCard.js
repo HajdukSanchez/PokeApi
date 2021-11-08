@@ -1,18 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { capitalize } from 'lodash'
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Image } from 'react-native'
+// * Utils
+import { getColorByType } from '../../utils/getColorByType'
 
 export function PokemonCard({ pokemon }) {
+  const bgStyles = {
+    // ? Styles for card background
+    backgroundColor: getColorByType(pokemon.type.toLowerCase()) || '#fff',
+    ...styles.bgStyles,
+  }
+
   const goToPokemon = () => {
     console.log(`Go to pokemon ${pokemon.name}`)
   }
+
   return (
     <TouchableWithoutFeedback onPress={goToPokemon}>
       <View style={styles.card}>
         <View style={styles.spacing}>
-          <View style={styles.bgStyles}>
+          <View style={bgStyles}>
             <Text style={styles.order}># {`${pokemon.order}`.padStart(3, 0)}</Text>
-            <Text style={styles.name}>{pokemon.name}</Text>
+            <Text style={styles.name}>{capitalize(pokemon.name)}</Text>
             <Image style={styles.image} source={{ uri: pokemon.image }} />
           </View>
         </View>
@@ -27,9 +37,7 @@ PokemonCard.defaultProps = {
     name: '',
     order: 0,
     image: '',
-    type: {
-      slot: 0,
-    },
+    type: '',
   },
 }
 
@@ -39,10 +47,7 @@ PokemonCard.propTypes = {
     name: PropTypes.string.isRequired,
     order: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-    type: PropTypes.shape({
-      slot: PropTypes.number.isRequired,
-      type: PropTypes.shape({ name: PropTypes.string, url: PropTypes.string }),
-    }),
+    type: PropTypes.string.isRequired,
   }).isRequired,
 }
 
@@ -56,8 +61,9 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   bgStyles: {
-    padding: 5,
-    backgroundColor: 'grey',
+    flex: 1,
+    borderRadius: 8,
+    padding: 10,
   },
   image: {
     position: 'absolute',

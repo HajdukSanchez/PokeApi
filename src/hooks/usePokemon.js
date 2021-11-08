@@ -18,7 +18,7 @@ export function usePokemon() {
           {
             id: pokemonDetail.id,
             name: pokemonDetail.name,
-            type: pokemonDetail.types[0],
+            type: pokemonDetail.types[0].type.name,
             order: pokemonDetail.order,
             image: pokemonDetail.sprites.other['official-artwork'].front_default,
           },

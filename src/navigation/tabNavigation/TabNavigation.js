@@ -9,7 +9,7 @@ const { Navigator, Screen } = createBottomTabNavigator()
 
 export function TabNavigation() {
   return (
-    <Navigator>
+    <Navigator initialRouteName='Pokedex'>
       <Screen
         name='Account'
         component={AccountNavigation}

@@ -8,7 +8,7 @@ export function PokemonList({ pokemons }) {
   return (
     <FlatList
       data={pokemons}
-      numColumns={1}
+      numColumns={2}
       showsVerticalScrollIndicator={false}
       keyExtractor={(pokemon) => String(pokemon.id)}
       renderItem={({ item }) => <PokemonCard pokemon={item} />}
@@ -27,6 +27,7 @@ PokemonList.propTypes = {
 
 const styles = StyleSheet.create({
   view: {
-    paddingTop: 50,
+    paddingTop: 20,
+    paddingBottom: 50,
   },
 })
