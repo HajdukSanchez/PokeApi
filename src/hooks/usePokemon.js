@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { getPokemon, getPokemonDetailByUrl } from '../api/pokemon'
+import { getPokemon, getPokemonById, getPokemonDetailByUrl } from '../api/pokemon'
 
 export function usePokemon() {
   const [pokemons, setPokemons] = useState([])
   const [nextUrl, setNextUrl] = useState(null)
+  const [pokemon, setPokemon] = useState({})
 
   useEffect(() => {
     ;(async () => await loadPokemons())()
@@ -31,5 +32,14 @@ export function usePokemon() {
     }
   }
 
-  return { pokemons, loadPokemons, nextUrl }
+  const loadPokemonById = async (id) => {
+    try {
+      const response = await getPokemonById(id)
+      setPokemon(response)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  return { pokemons, loadPokemons, nextUrl, loadPokemonById, pokemon }
 }
