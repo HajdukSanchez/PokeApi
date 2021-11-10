@@ -1,27 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { usePokemon } from '../../hooks/usePokemon'
+import { PokemonHeader } from '../../components'
 
 export function PokemonScreen({ route: { params }, navigation }) {
-  const { loadPokemonById, pokemon } = usePokemon()
+  const [pokemon, setPokemon] = useState(null)
+  const { loadPokemonById } = usePokemon()
 
   useEffect(() => {
     ;(async () => {
       try {
-        await loadPokemonById(params.id)
+        const response = await loadPokemonById(params.id)
+        setPokemon(response)
       } catch (error) {
         navigation.goBack()
       }
     })()
   }, [params])
 
-  if (!pokemon) return null
-
-  return (
-    <View>
-      <Text>{pokemon.id}</Text>
-      <Text>{pokemon.name}</Text>
-    </View>
-  )
+  if (!pokemon) {
+    return null
+  } else {
+    return (
+      <View>
+        <PokemonHeader
+          name={pokemon.name}
+          order={pokemon.order}
+          image={pokemon.sprites.other['official-artwork'].front_default}
+          type={pokemon.types[0].type.name}
+        />
+      </View>
+    )
+  }
 }

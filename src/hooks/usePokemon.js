@@ -4,7 +4,6 @@ import { getPokemon, getPokemonById, getPokemonDetailByUrl } from '../api/pokemo
 export function usePokemon() {
   const [pokemons, setPokemons] = useState([])
   const [nextUrl, setNextUrl] = useState(null)
-  const [pokemon, setPokemon] = useState({})
 
   useEffect(() => {
     ;(async () => await loadPokemons())()
@@ -35,11 +34,11 @@ export function usePokemon() {
   const loadPokemonById = async (id) => {
     try {
       const response = await getPokemonById(id)
-      setPokemon(response)
+      return response
     } catch (error) {
       throw new Error(error)
     }
   }
 
-  return { pokemons, loadPokemons, nextUrl, loadPokemonById, pokemon }
+  return { pokemons, loadPokemons, nextUrl, loadPokemonById }
 }
