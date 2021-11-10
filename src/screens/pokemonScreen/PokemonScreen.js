@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { View } from 'react-native'
+import { ActivityIndicator, ScrollView } from 'react-native'
 import { usePokemon } from '../../hooks/usePokemon'
-import { PokemonHeader } from '../../components'
+import { PokemonHeader, PokemonType } from '../../components'
 
 export function PokemonScreen({ route: { params }, navigation }) {
   const [pokemon, setPokemon] = useState(null)
@@ -20,17 +20,18 @@ export function PokemonScreen({ route: { params }, navigation }) {
   }, [params])
 
   if (!pokemon) {
-    return null
+    return <ActivityIndicator size='large' style={{ top: 200 }} color={'#AEAEAE'} />
   } else {
     return (
-      <View>
+      <ScrollView>
         <PokemonHeader
           name={pokemon.name}
           order={pokemon.order}
           image={pokemon.sprites.other['official-artwork'].front_default}
           type={pokemon.types[0].type.name}
         />
-      </View>
+        <PokemonType types={pokemon.types} />
+      </ScrollView>
     )
   }
 }

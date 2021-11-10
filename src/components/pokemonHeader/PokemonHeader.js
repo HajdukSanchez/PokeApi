@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderBottomEndRadius: 300,
     borderBottomLeftRadius: 300,
-    transform: [{ scaleX: 1.5 }],
+    transform: [{ scaleX: 2 }],
   },
   contentInfo: {
     marginHorizontal: 20,
@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top: 150,
+    top: 20,
   },
   image: {
-    width: 200,
-    height: 400,
+    width: 250,
+    height: 300,
     resizeMode: 'contain',
   },
 })
