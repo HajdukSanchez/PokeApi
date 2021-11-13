@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import { ActivityIndicator, ScrollView } from 'react-native'
 import { usePokemon } from '../../hooks/usePokemon'
 import { PokemonHeader, PokemonType, PokemonStats } from '../../components'
@@ -7,6 +8,21 @@ import { PokemonHeader, PokemonType, PokemonStats } from '../../components'
 export function PokemonScreen({ route: { params }, navigation }) {
   const [pokemon, setPokemon] = useState(null)
   const { loadPokemonById } = usePokemon()
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => null,
+      headerLeft: () => (
+        <Icon
+          name='arrow-left'
+          color='#fff'
+          size={20}
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.goBack()}
+        />
+      ),
+    })
+  }, [navigation, params])
 
   useEffect(() => {
     ;(async () => {

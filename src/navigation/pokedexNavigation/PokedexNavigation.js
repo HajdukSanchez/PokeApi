@@ -11,7 +11,7 @@ export function PokedexNavigation() {
       <Screen
         name='Pokedex'
         component={PokedexScreen}
-        options={{ title: 'Pokedex', headerShown: false }}
+        options={{ title: 'Pokedex', headerShown: false, headerTransparent: true }}
       />
       <Screen
         name='Pokemon'
