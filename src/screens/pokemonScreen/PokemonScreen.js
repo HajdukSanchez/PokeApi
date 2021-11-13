@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { ActivityIndicator, ScrollView } from 'react-native'
 import { usePokemon } from '../../hooks/usePokemon'
-import { PokemonHeader, PokemonType } from '../../components'
+import { PokemonHeader, PokemonType, PokemonStats } from '../../components'
 
 export function PokemonScreen({ route: { params }, navigation }) {
   const [pokemon, setPokemon] = useState(null)
@@ -31,6 +31,7 @@ export function PokemonScreen({ route: { params }, navigation }) {
           type={pokemon.types[0].type.name}
         />
         <PokemonType types={pokemon.types} />
+        <PokemonStats stats={pokemon.stats} />
       </ScrollView>
     )
   }
