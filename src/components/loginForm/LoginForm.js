@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { USER, USER_DETAILS } from '../../utils/userBD'
 
 export function LoginForm() {
+  const [error, setError] = useState('')
+
   // * Formik configuration
   const formik = useFormik({
     initialValues: initialValues(), // * Initial values
     validationSchema: Yup.object(validationSchema()), // * Validation schema
     validateOnChange: false, // * Show the validation messages only when the user press the submit button
-    onSubmit: (values) => {
-      // * Submit handler
-      console.log(values)
+    // * Submit handler
+    onSubmit: ({ username, password }) => {
+      if (username === USER.username && password === USER.password) {
+        console.log('Login success')
+        setError('')
+      } else {
+        setError('Invalid username or password')
+      }
     },
   })
 
@@ -34,7 +42,10 @@ export function LoginForm() {
         onChangeText={(text) => formik.setFieldValue('password', text)}
       />
       <Button style={styles.button} title='Log in' onPress={formik.handleSubmit} />
-      <Text style={styles.error}>{formik.errors.username || formik.errors.password}</Text>
+      {formik.errors && (
+        <Text style={styles.error}>{formik.errors.username || formik.errors.password}</Text>
+      )}
+      {error.length > 0 && <Text style={styles.error}>{error}</Text>}
     </View>
   )
 }
@@ -76,6 +87,7 @@ const styles = StyleSheet.create({
   button: {
     margin: 12,
     borderRadius: 10,
+    width: '50%',
   },
   error: {
     textAlign: 'center',
