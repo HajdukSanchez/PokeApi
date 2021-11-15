@@ -3,15 +3,17 @@ import { useEffect } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { ActivityIndicator, ScrollView } from 'react-native'
 import { usePokemon } from '../../hooks/usePokemon'
-import { PokemonHeader, PokemonType, PokemonStats } from '../../components'
+import useAuth from '../../hooks/useAuth'
+import { PokemonHeader, PokemonType, PokemonStats, Favorite } from '../../components'
 
 export function PokemonScreen({ route: { params }, navigation }) {
   const [pokemon, setPokemon] = useState(null)
   const { loadPokemonById } = usePokemon()
+  const { auth } = useAuth()
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => null,
+      headerRight: () => auth && <Favorite id={pokemon?.id} />, // * Show favorite button only if user is logged in
       headerLeft: () => (
         <Icon
           name='arrow-left'
@@ -22,7 +24,7 @@ export function PokemonScreen({ route: { params }, navigation }) {
         />
       ),
     })
-  }, [navigation, params])
+  }, [navigation, params, pokemon])
 
   useEffect(() => {
     ;(async () => {

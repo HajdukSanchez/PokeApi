@@ -6,3 +6,5 @@ export { PokemonStats } from './pokemonStats/PokemonStats'
 
 export { LoginForm } from './loginForm/LoginForm'
 export { UserData } from './userData/UserData'
+
+export { Favorite } from './favorite/Favorite'
