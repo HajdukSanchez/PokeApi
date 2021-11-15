@@ -6,8 +6,8 @@ export const USER = {
 
 // * Fake user information
 export const USER_DETAILS = {
-  username: 'jozekHajduk',
-  firstName: 'Jozek',
-  lastName: 'Hajduk',
+  userName: 'jozekHajduk',
+  firstName: 'Jozek Andrzej',
+  lastName: 'Hajduk Sanchez',
   email: 'hajduksanchez.dev@gmail.com',
 }

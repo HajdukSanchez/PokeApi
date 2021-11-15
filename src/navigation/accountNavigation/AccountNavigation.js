@@ -8,7 +8,11 @@ const { Navigator, Screen } = createStackNavigator()
 export function AccountNavigation() {
   return (
     <Navigator initialRouteName='Account'>
-      <Screen name='Account' component={AccountScreen} options={{ title: 'Account' }} />
+      <Screen
+        name='Account'
+        component={AccountScreen}
+        options={{ headerTransparent: true, title: '' }}
+      />
     </Navigator>
   )
 }
