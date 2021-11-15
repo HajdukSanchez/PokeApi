@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import useAuth from '../../hooks/useAuth'
 import { USER, USER_DETAILS } from '../../utils/userBD'
 
 export function LoginForm() {
   const [error, setError] = useState('')
+  const { login } = useAuth()
 
   // * Formik configuration
   const formik = useFormik({
@@ -15,8 +17,8 @@ export function LoginForm() {
     // * Submit handler
     onSubmit: ({ username, password }) => {
       if (username === USER.username && password === USER.password) {
-        console.log('Login success')
         setError('')
+        login(USER_DETAILS)
       } else {
         setError('Invalid username or password')
       }
