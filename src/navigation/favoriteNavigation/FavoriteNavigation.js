@@ -8,7 +8,11 @@ const { Navigator, Screen } = createStackNavigator()
 export function FavoriteNavigation() {
   return (
     <Navigator initialRouteName='Favorites'>
-      <Screen name='Favorites' component={FavoritesScreen} options={{ title: 'Favorites' }} />
+      <Screen
+        name='Favorites'
+        component={FavoritesScreen}
+        options={{ title: '', headerTransparent: true }}
+      />
     </Navigator>
   )
 }
