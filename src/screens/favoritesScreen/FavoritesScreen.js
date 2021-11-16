@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -17,25 +17,22 @@ export function FavoritesScreen() {
       if (auth) {
         ;(async () => {
           const response = await getPokemonFavoritesApi()
-          response.forEach(async (id) => {
-            const pokemonDetail = await getPokemonById(id) // * Get pokemon detail
-            setPokemons((pokemons) => [
-              ...pokemons, // * Add pokemon to array
-              {
-                id: pokemonDetail.id,
-                name: pokemonDetail.name,
-                type: pokemonDetail.types[0].type.name,
-                order: pokemonDetail.order,
-                image: pokemonDetail.sprites.other['official-artwork'].front_default,
-              },
-            ])
-          })
+          const pokemonsArray = []
+          for await (const id of response) {
+            const pokemonDetails = await getPokemonById(id)
+            pokemonsArray.push({
+              id: pokemonDetails.id,
+              name: pokemonDetails.name,
+              type: pokemonDetails.types[0].type.name,
+              order: pokemonDetails.order,
+              image: pokemonDetails.sprites.other['official-artwork'].front_default,
+            })
+          }
+          setPokemons(pokemonsArray)
         })()
       }
     }, [auth])
   )
-
-  console.log(pokemons)
 
   return (
     <SafeAreaView>
@@ -45,11 +42,11 @@ export function FavoritesScreen() {
           <Icon name='lock' color='gray' size={25} />
         </View>
       ) : (
-        <View style={styles.content}>
-          <Text style={styles.title}>Favorites</Text>
+        <>
+          <Text style={styles.title}>My Favorites</Text>
           <PokemonList pokemons={pokemons} />
           {pokemons.length === 0 && <Text style={styles.text}>No pokemons added yet</Text>}
-        </View>
+        </>
       )}
     </SafeAreaView>
   )
@@ -70,6 +67,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
+    marginTop: 20,
+    paddingLeft: 20,
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'left',
