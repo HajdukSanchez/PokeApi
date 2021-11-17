@@ -5,6 +5,7 @@ export { PokemonType } from './pokemonType/PokemonType'
 export { PokemonStats } from './pokemonStats/PokemonStats'
 
 export { LoginForm } from './loginForm/LoginForm'
+export { NotLogged } from './notLogged/NotLogged'
 export { UserData } from './userData/UserData'
 
 export { Favorite } from './favorite/Favorite'

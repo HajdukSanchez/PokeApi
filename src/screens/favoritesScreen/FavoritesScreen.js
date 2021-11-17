@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import { View, Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import useAuth from '../../hooks/useAuth'
 import { getPokemonFavoritesApi } from '../../api/favorite'
 import { getPokemonById } from '../../api/pokemon'
-import { PokemonList } from '../../components'
+import { NotLogged, PokemonList } from '../../components'
 
 export function FavoritesScreen() {
   const [pokemons, setPokemons] = useState([])
@@ -37,10 +36,7 @@ export function FavoritesScreen() {
   return (
     <SafeAreaView>
       {!auth ? (
-        <View style={styles.content}>
-          <Text style={styles.text}>Please login for see your favorites Pokemons</Text>
-          <Icon name='lock' color='gray' size={25} />
-        </View>
+        <NotLogged />
       ) : (
         <>
           <Text style={styles.title}>My Favorites</Text>
@@ -53,12 +49,6 @@ export function FavoritesScreen() {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    marginHorizontal: 20,
-    marginTop: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   text: {
     fontSize: 20,
     textAlign: 'center',
